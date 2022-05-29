@@ -20,7 +20,7 @@
                 <h2 class="card-header">Search for a City:</h2>
                 <form id="user-form" class="card-body">
                     <input name="cityName" id="cityName" type="text" autofocus="true" class="form-input col-12" />
-                    <button type="submit" class="btn">Search</button>
+                    <button type="submit" class="btn" id="submit">Search</button>
                 </form>
             </div>
 
@@ -36,10 +36,12 @@
         <!-- add container for weather forcast -->
         <div class="col-12 col-md-8">
             <div class="current-day-container">
+                <h3 id="searched-city"></h3>
                 <div id="current-date-weather" class="col-12 col-md-8 border"></div>
             </div>
             
             <div class="week-forcast-container">
+                <h3 class="col-12" id="forecast"></h3>
                 <div id="week-forecast" class="list-group"></div>
             </div>
 
@@ -49,7 +51,7 @@
 
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
