@@ -1,6 +1,5 @@
 var currentDayWeatherEl = document.querySelector("#current-date-weather");
 var weekForecastEl = document.querySelector("#week-farecast");
-var weekHeader = document.querySelector("#week-header");
 // form input for the city
 var cityInputEl = document.querySelector("#cityName");
 var cityFormEl = document.querySelector("#city-search-form");
@@ -12,7 +11,6 @@ var formSubmitHandler = function(event) {
     if (activeCity) {
         // call functions
         getCityWeather(activeCity);
-        getWeekForecast(activeCity);
 
     }
     else {
@@ -41,15 +39,17 @@ var getCityWeather = function(city) {
 var displayWeather = function(weather, searchCity) {
     // clear old information
     currentDayWeatherEl.textContent = "";
-    cityInputEl.textContent = "";
+    cityInputEl.textContent = searchCity;
 
     // create a date element
-    var currentDate = document.createElement("span");
-    currentDate.textContent = " (" + moment(weather.dt.value).format("MMM D, YYYY") + ")";
-    cityInputEl.appendChild(currentDate);
+    // var currentDate = document.createElement("span");
+    // currentDate.textContent = " (" + moment(weather.dt.value).format("MMM D, YYYY") + ")";
+    // cityInputEl.appendChild(currentDate);
 
     // create an image element
-
+    // var weatherIcon = document.createElement("img");
+    // weatherIcon.setAttribute("src", "https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png")
+    // currentCityInputEl.appendChild(weatherIcon);
 
     // create a span element to hold temp data
     var temperatureEl = document.createElement("span");
@@ -58,13 +58,6 @@ var displayWeather = function(weather, searchCity) {
     // append to the container
     currentDayWeatherEl.appendChild(temperatureEl);
 
-    //create a span element to hold Wind data
-    var windSpeedEl = document.createElement("span");
-    windSpeedEl.textContent = "Wind Speed: " + weather.wind.speed + " MPH";
-    windSpeedEl.classList = "list-group-item";
-    // append to the container
-    currentDayWeatherEl.appendChild(windSpeedEl);
-
     //create a span element to hold Humidity data
     var humidityEl = document.createElement("span");
     humidityEl.textContent = "Humidity: " + weather.main.humidity + " %";
@@ -72,7 +65,12 @@ var displayWeather = function(weather, searchCity) {
     // append to the container
     currentDayWeatherEl.appendChild(humidityEl);
 
-
+    //create a span element to hold Wind data
+    var windSpeedEl = document.createElement("span");
+    windSpeedEl.textContent = "Wind Speed: " + weather.wind.speed + " MPH";
+    windSpeedEl.classList = "list-group-item";
+    // append to the container
+    currentDayWeatherEl.appendChild(windSpeedEl);
 
     var latitude = weather.coord.lat;
     var longitude = weather.coord.lon;
@@ -113,59 +111,6 @@ var displayUvIndex = function(index) {
     currentDayWeatherEl.appendChild(uvIndexEl);
 };
 
-var getWeekForecast = function(city) {
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
-
-    fetch(apiUrl).then(function(response) {
-        response.json().then(function(data) {
-            displayWeekWeather(data);
-        });
-    });
-};
-
-var displayWeekWeather = function(weather) {
-    weekForecastEl.textContent = "";
-    weekHeader.textContent = "Week Forecast";
-
-    var upComingWeather = weather.list;
-    for (var i = 5; i < upComingWeather.length; i=i+8) {
-        var dailyForecast = upComingWeather[i];
-
-        var forecastEl = document.createElement("div");
-        forecastEl.classList = "card bg-primary text-light m-2";
-
-        // create date element
-        var forecastDate = document.createElement("h4");
-        forecastDate.textContent = moment().unix(dailyForecast.dt).format("MMM D, YYYY");
-        forecastDate.classList = "card-header text-center";
-        forecastEl.appendChild(forecastDate);
-
-        // create image icon
-
-        // create a span element to hold temp data
-        var forecastWeekTemp = document.createElement("span");
-        forecastWeekTemp.textContent = "Temperature: " + weather.main.temp + " °F";
-        forecastWeekTemp.classList = "list-group-item";
-        // append to the container
-        forecastEl.appendChild(forecastWeekTemp);
-
-
-        //create a span element to hold Wind data
-        var forecastWeekWind = document.createElement("span");
-        forecastWeekWind.textContent = "Wind Speed: " + weather.wind.speed + " MPH";
-        forecastWeekWind.classList = "list-group-item";
-        // append to the container
-        forecastEl.appendChild(forecastWeekWind);
-
-        //create a span element to hold Humidity data
-        var forecastWeekHumidity = document.createElement("span");
-        forecastWeekHumidity.textContent = "Humidity: " + weather.main.humidity + " %";
-        forecastWeekHumidity.classList = "list-group-item";
-        // append to the container
-        forecastEl.appendChild(forecastWeekHumidity);
-
-    }
-};
 
 
 
