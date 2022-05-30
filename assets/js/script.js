@@ -9,6 +9,7 @@ var cityInputEl = document.querySelector("#cityName");
 var cityFormEl = document.querySelector("#city-search-form");
 var searchedCityEl = document.querySelector("#searched-city");
 
+// empty array to hold cities searched for
 var cities = []
 
 
@@ -36,6 +37,7 @@ var saveInput = function() {
 };
 
 var getCityWeather = function(city) {
+
 
     // give the url for the city the user types in with parameters
     var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
