@@ -23,7 +23,7 @@ var formSubmitHandler = function(event) {
         getCityWeather(activeCity);
         get5Day(activeCity);
         cities.unshift({activeCity});
-        activeCity.value = "";
+        searchedCityEl.textContent = "";
     }
     else {
         alert("Please enter a City!");
