@@ -28,7 +28,7 @@ var formSubmitHandler = function(event) {
         alert("Please enter a City!");
     }
     saveInput();
-    // pastSearch(activeCity);
+    previousSearch(activeCity);
 };
 
 var saveInput = function() {
@@ -148,7 +148,6 @@ var display5Day = function(weather) {
     weekForecastEl.textContent = "";
     forecastTitle.textContent = "Week Forecast";
 
-    console.log(weather);
     for (var i = 5; i <= weather.list.length; i=i+8) {
         var dailyForecast = weather.list[i];
 
@@ -201,11 +200,13 @@ var display5Day = function(weather) {
 };
 
 var previousSearch = function(pastSearch) {
-    pastSearchEl = document.createElement("button");
-    pastSearchEl.textContent = pastSearch;
-    pastSearchEl.classList = "d-flex w-100 btn-light border p-2";
-    pastSearchEl.setAttribute("data-city", pastSearch);
-    pastSearchEl.setAttribute("type", "submit");
+    previousCity = document.createElement("button");
+    previousCity.classList = "d-flex w-100 btn-light border p-2";
+    previousCity.setAttribute("data-city", pastSearch);
+    previousCity.setAttribute("type", "submit");
+    previousCity.textContent = pastSearch;
+
+    previousCitySearch.appendChild(previousCity);
 };
 
 var previousSearchHandler = function(event) {
@@ -219,4 +220,4 @@ var previousSearchHandler = function(event) {
 
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
-pastSearchButtonEl.addEventListener("click", previousSearchHandler);
+previousCitySearch.addEventListener("click", previousSearchHandler);
